@@ -1,0 +1,18 @@
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration><!--
+================================================================================
+mybatis-config.xml
+================================================================================
+@author    Md. Emran Hossain<emranhos1@gmail.com>
+@version   1.0.00 EH
+@since     1.0.00 EH
+================================================================================
+--> <settings>
+        <setting name="logImpl" value="LOG4J" />
+        <setting name="defaultFetchSize" value="100"/>
+        <setting name="useGeneratedKeys" value="false"/>
+        <setting name="lazyLoadingEnabled" value="true"/>
+        <setting name="defaultStatementTimeout" value="30"/>
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+    </settings>
+</configuration>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration PUBLIC "-//LOGGER" "http://logging.apache.org/log4j/1.2/apidocs/org/apache/log4j/xml/doc-files/log4j.dtd">
+<log4j:configuration><!--
+================================================================================
+log4j configuration
+================================================================================
+@author    Md. Emran Hossain<emranhos1@gmail.com>
+@version   1.0.00 EH
+@since     1.0.00 EH
+================================================================================
+--> <appender name="file" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="File" value="${user.home}/.eh/grocery/var/log/grcry/GRCRY.LOGR"/>
+        <param name="threshold" value="INFO"/>
+        <param name="DatePattern" value="'.'yyyyMMdd'.log'"/>
+        <param name="Append" value="true"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d{MMM dd, yyyy HH:mm:ss a} %c [METHOD: %M , LINE: %L]%n[%-5p] %m%n"/>
+        </layout>
+    </appender>
+    
+    <appender name="console" class="org.apache.log4j.ConsoleAppender">
+        <param name="Target" value="System.out"/>
+        <param name="threshold" value="INFO"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d{MMM dd, yyyy HH:mm:ss a} %c [METHOD: %M , LINE: %L]%n[%-5p] %m%n"/>
+        </layout>
+    </appender>
+    
+    <category name="com.eh.grocery.dev.mapper">
+        <priority value="WARN" />
+    </category>
+    
+    <category name="springfox.documentation">
+        <priority value="WARN" />
+    </category>
+    
+    <category name="javax.servlet">
+        <priority value="WARN"/>
+    </category>
+    
+    <category name="org.apache.activemq">
+        <priority value="WARN"/>
+    </category>
+    
+    <category name="org.apache.camel">
+        <priority value="WARN"/>
+    </category>
+    
+    <category name="org.jasypt">
+        <priority value="WARN"/>
+    </category>
+    
+    <category name="org.quartz">
+        <priority value="WARN"/>
+    </category>
+    
+    <category name="org.springframework">
+        <priority value="WARN"/>
+    </category>
+    
+    <category name="org.thymeleaf">
+        <priority value="WARN"/>
+    </category>
+    
+    <category name="com.zaxxer">
+        <priority value="WARN"/>
+    </category>
+    
+    <category name="bitronix.tm">
+        <priority value="WARN"/>
+    </category>
+    
+    <category name="com.eh.grocery">
+        <priority value="INFO"/>
+    </category>
+    
+    <root>
+        <priority value="INFO"/>
+        <appender-ref ref="console"/>
+        <appender-ref ref="file"/>
+    </root>
+</log4j:configuration>

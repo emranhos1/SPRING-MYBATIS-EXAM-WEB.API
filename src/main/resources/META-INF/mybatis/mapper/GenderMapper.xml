@@ -1,0 +1,96 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.eh.grocery.dev.mapper.GenderMapper"><!--
+================================================================================
+@author    Md. Emran Hossain<emranhos1@gmail.com>
+@version   1.0.00 EH
+@since     1.0.00 EH
+================================================================================
+--> <resultMap id="GenderMap" type="Gender">
+        <result property="amendDate"          column="t_upd_date"/>
+        <result property="amendUser"          column="t_upd_user"/>
+        <result property="entryDate"          column="t_entry_date"/>
+        <result property="entryUser"          column="t_entry_user"/>
+
+        <result property="code"               column="t_sex_code"/>
+        <result property="nameNative"         column="t_lang1_name"/>
+        <result property="nameGlobal"         column="t_lang2_name"/>
+        <result property="shortName"          column="t_short_gndr_name" />
+    </resultMap>
+
+    <sql id="GenderFind">
+        ${alias}.t_upd_date,
+        ${alias}.t_upd_user,
+        ${alias}.t_entry_date,
+        ${alias}.t_entry_user,
+
+        ${alias}.t_sex_code,
+        ${alias}.t_lang1_name,
+        ${alias}.t_lang2_name,
+        ${alias}.t_short_gndr_name
+    </sql>
+
+    <select id="countAll" resultType="Long">
+        SELECT
+            COUNT(*)
+        FROM
+            Gender g
+    </select>
+
+    <select id="selectAll" resultMap="GenderMap">
+        SELECT
+            <include refid="GenderFind"><property name="alias" value="g"/></include>
+        FROM
+            Gender g
+    </select>
+
+    <select id="searchByOffset" resultMap="GenderMap" parameterType="java.util.Map">
+        SELECT
+            <include refid="GenderFind"><property name="alias" value="g"/></include>
+        FROM
+            Gender g
+        WHERE
+            1 = 1
+    </select>
+
+    <select id="selectByCode" resultMap="GenderMap" parameterType="String">
+        SELECT
+            <include refid="GenderFind"><property name="alias" value="g"/></include>
+        FROM
+            Gender g
+        WHERE
+            g.t_sex_code =#{code, jdbcType=VARCHAR}
+    </select>
+
+    <insert id="insert" parameterType="Gender">
+        INSERT INTO GENDER (
+            t_entry_date,
+            t_entry_user,
+
+            t_lang1_name,
+            t_lang2_name,
+            t_short_gndr_name
+        ) VALUES (
+            #{entryDate,  jdbcType=DATE   },
+            #{entryUser,  jdbcType=VARCHAR},
+
+            #{nameNative, jdbcType=VARCHAR},
+            #{nameGlobal, jdbcType=VARCHAR},
+            #{shortName,  jdbcType=VARCHAR}
+        )
+    </insert>
+
+    <update id="update" parameterType="Gender">
+        UPDATE gender
+        <set>
+            <if test="amendDate !=null">  t_upd_date        = #{amendDate,  jdbcType=DATE   },</if>
+            <if test="amendUser !=null">  t_upd_user        = #{amendUser,  jdbcType=VARCHAR},</if>
+            <if test="entryDate !=null">  t_entry_date      = #{entryDate,  jdbcType=DATE   },</if>
+            <if test="entryUser !=null">  t_entry_user      = #{entryUser,  jdbcType=VARCHAR},</if>
+
+            <if test="nameNative !=null"> t_lang1_name      = #{nameNative, jdbcType=VARCHAR},</if>
+            <if test="nameGlobal !=null"> t_lang2_name      = #{nameGlobal, jdbcType=VARCHAR},</if>
+            <if test="shortName !=null">  t_short_gndr_name = #{shortName,  jdbcType=VARCHAR}</if>
+        </set>
+        WHERE t_sex_code = #{code, jdbcType=VARCHAR}
+    </update>
+</mapper>

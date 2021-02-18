@@ -1,0 +1,44 @@
+#######################################################
+## @author   Md. Emran Hossain <emranhos1@gmail.com> ##
+## @version  1.0.00 EH                               ##
+## @since    1.0.00 EH                               ##
+#######################################################
+#######################################################
+## application snake yaml properties                 ##
+#######################################################
+exam:
+  datasource:
+    url: jdbc:mysql://localhost:3306/spring-mybatis-grocery
+    username: root
+    password: medisys
+    unique-name: spring-mybatis-grocery
+server:
+  port: 9191
+  servlet:
+    contextPath: /v.1.0/rest
+spring:
+  datasource:
+    url: ${exam.datasource.url}
+    username: ${exam.datasource.username}
+    password: ${exam.datasource.password}
+
+## Hibernate Properties
+# The SQL dialect makes Hibernate generate better SQL for the chosen database
+# Hibernate ddl auto (create, create-drop, validate, update)
+# For initital Data Please modify update to create-drop
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+
+logging:
+  level:
+    org.springframework: WARN
+    org.rufaida: INFO
+####################################################################################
+## built on: Tue, Feb 02 2021, 12:34                      by: emranhos1@gmail.com ##
+####################################################################################
